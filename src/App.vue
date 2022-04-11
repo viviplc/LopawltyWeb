@@ -1,5 +1,7 @@
 <template>
-  <div id="app">
+  <div>
+    <header>
+      <div id="app">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -60,15 +62,22 @@
     </div>
     <router-view />
   </div>
+    </header>
+    <footer>
+      <FooterGeneral/>
+    </footer>
+  </div>  
 </template>
 
 <script>
 import Modal from "./components/Modal.vue";
+import FooterGeneral from "./components/FooterGeneral.vue";
 
 export default {
   name: "App",
   components: {
     Modal,
+    FooterGeneral,
   },
   data() {
     return {};
