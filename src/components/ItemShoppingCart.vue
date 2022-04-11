@@ -1,4 +1,55 @@
 <template>
+  <div>
+    <div class="row cartItemRow">
+      <div class="col-md-1 cartItemCol text-center">
+        <label class="checkbox-container delete-item-holder">
+          <input
+            type="checkbox"
+            id="itemId"
+            :checked="selected"
+            v-on:click="toggleSelect()"
+          />
+          <span class="check-mark"></span>
+        </label>
+      </div>
+
+      <div class="col-md-2 cartItemCol text-center">
+        <div class="item-image">
+          <img class="img-fluid" :src="getImgUrl(image)" v-bind:alt="image" />
+        </div>
+      </div>
+      <div class="col-md-2 cartItemCol">
+        <h3>{{ productname }}</h3>
+      </div>
+      <div class="col-md-1 cartItemCol">
+        <h3>$ {{ productprice }}</h3>
+      </div>
+      <div class="col-md-3 cartItemCol">
+        <div class="details-container">
+          <div class="quatity-container text-center">
+            <button class="btn-squared" v-on:click="decreaseQuantity()">
+              <i class="fa fa-minus"></i>
+            </button>
+            <div class="productQuantityAmount">{{ productquantity }}</div>
+            <button class="btn-squared" v-on:click="increaseQuantity()">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 cartItemCol">
+        <h3>$ {{ subTotal }}</h3>
+      </div>
+      <div class="col-md-1 cartItemCol text-center">
+        <div class="delete-item-holder">
+          <button class="btn-white" v-on:click="deleteCartItem(itemId)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--
+<div class="cartItemContainer">
   <div class="item">
     <label class="checkbox-container">
       <input type="checkbox" id="itemId" :checked="selected" v-on:click="toggleSelect()"/>
@@ -30,6 +81,8 @@
     <button class="btn-white" v-on:click="deleteCartItem(itemId)">
       <i class="fa fa-trash"></i>
     </button>
+  </div>
+  </div> -->
   </div>
 </template>
 
@@ -65,19 +118,25 @@ export default {
       required: true,
     },
   },
+  computed: {
+    subTotal() {
+      var num = this.productprice * this.productquantity;
+      return num.toFixed(2);
+    },
+  },
   methods: {
     getImgUrl(pic) {
       return require("../assets/" + pic);
     },
-    toggleSelect(){
+    toggleSelect() {
       let quantity = this.productquantity;
       let selected = !this.selected;
       let productId = this.itemId;
-        this.$store.dispatch("updateProductInCart", {
-          productId,
-          quantity,
-          selected,
-        })
+      this.$store.dispatch("updateProductInCart", {
+        productId,
+        quantity,
+        selected,
+      });
     },
     decreaseQuantity() {
       if (this.productquantity > 1) {
@@ -88,7 +147,7 @@ export default {
           productId,
           quantity,
           selected,
-        })
+        });
         //this.productquantity -= 1;
       }
     },
@@ -96,14 +155,14 @@ export default {
       let quantity = this.productquantity + 1;
       let selected = this.selected;
       let productId = this.itemId;
-        this.$store.dispatch("updateProductInCart", {
-          productId,
-          quantity,
-          selected,
-        })
+      this.$store.dispatch("updateProductInCart", {
+        productId,
+        quantity,
+        selected,
+      });
     },
     deleteCartItem(productId) {
-      this.$store.dispatch("deleteProductFromCart", {productId})
+      this.$store.dispatch("deleteProductFromCart", { productId });
     },
   },
 };
@@ -120,6 +179,35 @@ export default {
   margin: 23px;
   padding: 24px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tableTitle {
+  color: rgb(14, 125, 239);
+  text-align: center;
+  font-size: 30px;
+}
+
+.cartItemRow {
+  justify-content: center;
+  align-items: center;
+  border: solid 5px rgb(212, 228, 244);
+  border-radius: 15px;
+  margin: 10px;
+  padding: 8px;
+}
+
+.cartItemColCenter {
+  justify-content: center;
+  align-items: center;
+}
+
+.cartItemCol {
+  align-items: center;
+}
+
+.delete-item-holder {
+  justify-content: center;
+  align-items: center;
 }
 
 .checkbox-container {
@@ -149,18 +237,18 @@ export default {
   left: 0;
   height: 27px;
   width: 27px;
-  border: 4px solid #23b1bb;
+  border: 4px solid #007aff;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .checkbox-container:hover input ~ .check-mark {
-  background-color: #beeff2;
+  background-color: rgb(212, 228, 244);
 }
 
 .checkbox-container input:checked ~ .check-mark {
-  background-color: #23b1bb;
+  background-color: #007aff;
 }
 
 .check-mark:after {
@@ -186,8 +274,6 @@ export default {
 }
 
 .item-image img {
-  width: 252px;
-  height: 217px;
   overflow: hidden;
   border-radius: 15px;
   margin-left: 24px;
@@ -200,14 +286,39 @@ export default {
 
 .details-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .quatity-container {
   display: flex;
 }
 
+.btn-squared {
+  background-color: #707070;
+  border: none;
+  border-radius: 15px;
+  color: #fff;
+  height: 70px;
+  width: 70px;
+  margin: 10px;
+  font-size: 40px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.productQuantityAmount {
+  font-size: 40px;
+  border-radius: 15px;
+  height: 70px;
+  width: 70px;
+
+  margin: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .btn-rounded {
-  background-color: #23b1bb;
+  background-color: #007aff;
   border: none;
   border-radius: 50%;
   color: #fff;
@@ -222,7 +333,7 @@ export default {
 .btn-white {
   background-color: #fff;
   border: none;
-  color: #23b1bb;
+  color: #007aff;
   height: 35px;
   width: 35px;
   font-size: 35px;
@@ -254,5 +365,3 @@ export default {
   margin-left: 10px;
 }
 </style>
-
-
