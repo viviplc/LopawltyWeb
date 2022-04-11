@@ -23,7 +23,7 @@
               </router-link>
             </div>
             <div class="nav_link">
-              <form action="">
+              <form class="nav_link_form" action="">
                 <input type="search" required />
                 <i class="fa fa-fw fa-search"></i>
               </form>
@@ -34,9 +34,26 @@
               </router-link>
             </div>
             <div class="nav_link">
-              <router-link class="btn-white" to="/shoppingCart">
+              <button v-if="isLoggedIn" class="login-button">
+                <div>
+                  <img
+                    class="rounded-circle z-depth-2"
+                    style="width: 58px; border: 3px solid #007aff"
+                    v-bind:src="loggedInProfile.profileImage"
+                  />
+                  <b-dropdown id="dropdown-1" class="m-md-2">
+                    <b-dropdown-item @click="logoutUser" class="dropdown-opt">
+                      <router-link class="dropdown-link" to="/"
+                        >Log Out</router-link
+                      >
+                    </b-dropdown-item>
+                  </b-dropdown>
+                </div>
+              </button>
+              <button v-else class="login-button" @click="showModal">
                 <i class="fa fa-fw fa-user"></i>
-              </router-link>
+              </button>
+              <Modal v-show="isModalVisible" @close="closeModal" />
             </div>
           </div>
         </nav>
@@ -45,6 +62,50 @@
     <router-view />
   </div>
 </template>
+
+<script>
+import Modal from "./components/Modal.vue";
+
+export default {
+  name: "App",
+  components: {
+    Modal,
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    isModalVisible() {
+      return this.$store.state.isModalVisible;
+    },
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    },
+    loggedInProfile() {
+      return this.$store.state.loggedInUser;
+      /*This is what the profile structure is (you can edit it in the index.js of the store folder):
+      loggedInUser: {
+      userId: 123,
+      name: "Julia Guo",
+      profileImage: "https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg",
+    }
+      */
+    },
+  },
+  methods: {
+    logoutUser() {
+      this.$store.commit("LOGOUT_USER");
+    },
+    showModal() {
+      this.$store.commit("SHOW_MODAL");
+    },
+    closeModal() {
+      this.$store.commit("HIDE_MODAL");
+    },
+  },
+};
+</script>
+
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
@@ -78,7 +139,7 @@
   font-weight: bold;
 }
 
-.nav_link_central{
+.nav_link_central {
   position: relative;
   transform: translate(-265px, -55px);
 }
@@ -143,7 +204,7 @@
   margin-right: 20px;
 }
 
-form {
+.nav_link_form {
   position: absolute;
   margin-top: 0px;
   margin-left: 0px;
@@ -157,7 +218,7 @@ form {
   padding: 5px;
 }
 
-input {
+.nav_link_form input {
   position: absolute;
   top: 0;
   left: 0;
@@ -172,7 +233,7 @@ input {
   padding: 0 20px;
 }
 
-form .fa {
+.nav_link_form .fa {
   box-sizing: border-box;
   padding: 0px;
   width: 40px;
@@ -187,25 +248,25 @@ form .fa {
   transition: all 1s;
 }
 
-form:hover,
-form:valid {
+.nav_link_form:hover,
+.nav_link_form:valid {
   transform: translate(-340px, -35px);
   width: 300px;
   cursor: pointer;
 }
 
-form:hover input,
-form:valid input {
+.nav_link_form:hover input,
+.nav_link_form:valid input {
   display: block;
 }
 
-form:hover .fa,
-form:valid .fa {
+.nav_link_form:hover .fa,
+.nav_link_form:valid .fa {
   background: #007aff;
   color: white;
 }
 
-form a {
+.nav_link_form a {
   display: none;
   position: absolute;
   top: 70px;
@@ -218,7 +279,45 @@ form a {
   width: 100%;
 }
 
-form:valid a {
+.nav_link_form:valid a {
   display: block;
+}
+
+.login-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #007aff;
+  height: 40px;
+  width: 40px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #007aff;
 }
 </style>
