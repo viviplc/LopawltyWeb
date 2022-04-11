@@ -23,7 +23,7 @@ export default new Vuex.Store({
     loginSucessStatus: "none",
     isLoggedIn: false,
     loggedInUser: {},
-    currentFilter: "dogs",
+    currentFilter: "dog",
   },
   mutations: {
     SHOW_MODAL(state) {
@@ -112,6 +112,7 @@ export default new Vuex.Store({
             productName: item["product_name"],
             productDescription: item["product_description"],
             productPrice: parseFloat(item["product_price"]),
+            productCategory: item["product_category"]
           };
         });
         commit("SET_PRODUCTS", productArray);

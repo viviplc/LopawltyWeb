@@ -1,35 +1,38 @@
 <template>
-<div class="mainContainer">
-  <div class="home-filters ">
-        <div
-          class="filterbtn-component"
-          v-for="filter in filters"
-          v-bind:key="filter.filterId"
-        >
-          <FilterButton
-            :filterId="filter.filterId"
-            :image="filter.image"
-            :filtername="filter.filterName"
-          >
-          </FilterButton>
-        </div>
-      </div>
-  <div class="items-container" id="itemView">
-    
-    <div class="item-component" v-for="item in items" v-bind:key="item.itemId">
-      <Item
-        :itemId="item.itemId"
-        :image="item.image"
-        :productname="item.productName"
-        :productdescription="item.productDescription"
-        :productprice="item.productPrice"
+  <div class="mainContainer">
+    <div class="home-filters">
+      <div
+        class="filterbtn-component"
+        v-for="filter in filters"
+        v-bind:key="filter.filterId"
       >
-      </Item>
+        <FilterButton
+          :filterId="filter.filterId"
+          :image="filter.image"
+          :filtername="filter.filterName"
+          :filtercode="filter.filterCode"
+        >
+        </FilterButton>
+      </div>
+    </div>
+    <div class="items-container" id="itemView">
+      <div
+        class="item-component"
+        v-for="item in items"
+        v-bind:key="item.itemId"
+      >
+        <Item
+          :itemId="item.itemId"
+          :image="item.image"
+          :productname="item.productName"
+          :productdescription="item.productDescription"
+          :productprice="item.productPrice"
+        >
+        </Item>
+      </div>
     </div>
   </div>
-  </div>
 </template>
-
 
 <script>
 // @ is an alias to /src
@@ -44,8 +47,17 @@ export default {
   },
   computed: {
     items() {
-      let productsArray = this.$store.state.products;
-      return productsArray;
+      if (this.$store.state.currentFilter == "") {
+        return this.$store.state.products;
+      } else {
+        let productsArray = this.$store.state.products;
+        //productCategory
+        let filter = this.$store.state.currentFilter;
+        var newArray = productsArray.filter(function (el) {
+          return el.productCategory == filter;
+        });
+        return newArray;
+      }
     },
   },
   data() {
@@ -55,21 +67,25 @@ export default {
           filterId: 1,
           image: "filter1.png",
           filterName: "Dogs",
+          filterCode: "dog",
         },
         {
           filterId: 2,
           image: "filter2.png",
           filterName: "Cats",
+          filterCode: "cat",
         },
         {
           filterId: 3,
           image: "filter3.png",
           filterName: "Fish",
+          filterCode: "fish",
         },
         {
           filterId: 4,
           image: "filter4.png",
           filterName: "Birds",
+          filterCode: "bird",
         },
       ],
     };

@@ -26,6 +26,10 @@ export default {
       type: String,
       required: true,
     },
+    filtercode: {
+      type: String,
+      required: true,
+    },
   },
   methods: {
     getImgUrl(pic) {
@@ -35,7 +39,7 @@ export default {
       return "";
     },
     setFilter() {
-      this.$store.dispatch("setFilterType", { filter: this.filtername });
+      this.$store.dispatch("setFilterType", { filter: this.filtercode });
     }
   }
 };
