@@ -34,8 +34,7 @@ export default {
     getFilterUrl() {
       return "";
     },
-  },
-  data() {},
+  }
 };
 </script>
 
