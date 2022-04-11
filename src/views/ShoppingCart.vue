@@ -72,14 +72,15 @@ export default {
           });
         }
       }
-      //return finalResult;
+      return finalResult;
 
-      let finalResult2 = [];
+      /*let finalResult2 = [];
       for (let product of productsArray) {
         finalResult2.push({ productQuantity: 5, selected: true, ...product });
       }
       // alert(JSON.stringify(finalResult2))
       return finalResult2;
+      */
     },
 
     itemsprice() {

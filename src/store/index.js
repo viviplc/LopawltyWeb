@@ -21,8 +21,10 @@ export default new Vuex.Store({
     userOrders: [],
     isModalVisible: false,
     loginSucessStatus: "none",
-    isLoggedIn: false,
-    loggedInUser: {},
+    isLoggedIn: true,
+    loggedInUser: {
+      userId: 2,
+    },
   },
   mutations: {
     SHOW_MODAL(state) {
@@ -270,7 +272,6 @@ export default new Vuex.Store({
         Object.keys(data).forEach((key) => {
           formData.append(key, data[key]);
         });
-
         axios
           .post(`${Constants.API_BASE_URL}/addProductToCart.php`, formData)
           .then((response) => {
