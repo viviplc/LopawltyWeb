@@ -30,6 +30,10 @@ export default {
       type: String,
       required: true,
     },
+    filterLink: {
+      type: Boolean,
+      required: true,
+    }
   },
   methods: {
     getImgUrl(pic) {
@@ -40,6 +44,10 @@ export default {
     },
     setFilter() {
       this.$store.dispatch("setFilterType", { filter: this.filtercode });
+      if(this.filterLink){
+        this.$router.push('/Product');
+        
+      }
     }
   }
 };

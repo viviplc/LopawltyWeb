@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="col-md-1 cartItemCol">
-        <h3>$ {{ subTotal }}</h3>
+        <h4>$ {{ subTotal }}</h4>
       </div>
       <div class="col-md-1 cartItemCol text-center">
         <div class="delete-item-holder">
