@@ -21,10 +21,9 @@ export default new Vuex.Store({
     userOrders: [],
     isModalVisible: false,
     loginSucessStatus: "none",
-    isLoggedIn: true,
-    loggedInUser: {
-      userId: 2,
-    },
+    isLoggedIn: false,
+    loggedInUser: {},
+    currentFilter: "dogs",
   },
   mutations: {
     SHOW_MODAL(state) {
@@ -165,6 +164,12 @@ export default new Vuex.Store({
         }
       }
     },
+
+    setFilterType(_, {filter}) {
+      this.state.currentFilter = filter;
+      //alert("filter" + filter)
+    },
+
     loginUser({ commit, dispatch }, { email, password }) {
       const data = {
         email,

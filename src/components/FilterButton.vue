@@ -1,6 +1,6 @@
 <template>
   <div class="btn_filter">
-    <a v-bind:href="getFilterUrl()">
+    <a v-on:click="setFilter()" class="filterButton">
       <div class="filter-img">
         <img :src="getImgUrl(image)" v-bind:alt="image" />
       </div>
@@ -34,11 +34,18 @@ export default {
     getFilterUrl() {
       return "";
     },
+    setFilter() {
+      this.$store.dispatch("setFilterType", { filter: this.filtername });
+    }
   }
 };
 </script>
 
 <style>
+.filterButton {
+  cursor: pointer; 
+}
+
 .btn_filter {
   display: flex;
   height: 130px;
