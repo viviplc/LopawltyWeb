@@ -18,6 +18,7 @@ export default new Vuex.Store({
     products: [],
     productsBought: [],
     productReviews: {},
+    userOrders: [],
     isModalVisible: false,
     loginSucessStatus: "none",
     isLoggedIn: false,
@@ -191,6 +192,18 @@ export default new Vuex.Store({
         .catch(() => {
           commit("LOGIN_FAIL");
         });
+    },
+    async getUserOrders() {
+      if (this.state.isLoggedIn) {
+        try {
+          const response = await axios.get(
+            `${Constants.API_BASE_URL}/getOrdersByUserId.php?user_id=${this.state.loggedInUser.userId}`
+          );
+          this.state.userOrders = response.data;
+        } catch {
+          console.log("Error getting user orders");
+        }
+      }
     },
     async getUserCart({ commit }) {
       if (this.state.isLoggedIn) {
