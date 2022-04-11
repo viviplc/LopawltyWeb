@@ -15,10 +15,10 @@
         </router-link>
         <nav>
           <div class="nav-links">
-            <div class="nav_link">
+            <div class="nav_link_central">
               <router-link class="navbar-brand" to="/Product">
                 <div class="Product">
-                  <h3>Product</h3>
+                  <h3>Products</h3>
                 </div>
               </router-link>
             </div>
@@ -76,6 +76,11 @@
   padding-left: 5%;
   text-decoration: none;
   font-weight: bold;
+}
+
+.nav_link_central{
+  position: relative;
+  transform: translate(-265px, -55px);
 }
 
 .navbar-brand h1 {
