@@ -115,7 +115,7 @@ export default {
 
 .resume-container h3{
     font-size: 23px;
-    color: #23B1BB;
+    color: #007AFF;
     font-weight: bold;
 }
 
