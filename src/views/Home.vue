@@ -15,6 +15,7 @@
             :image="filter.image"
             :filtername="filter.filterName"
             :filtercode="filter.filterCode"
+            :filterLink="true"
           >
           </FilterButton>
         </div>
