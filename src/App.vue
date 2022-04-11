@@ -36,10 +36,10 @@
             </div>
             <div class="nav_link">
               <button v-if="isLoggedIn" class="login-button">
-                <div>
+                <div class="inner-drop">
                   <img
                     class="rounded-circle z-depth-2"
-                    style="width: 58px; border: 3px solid #007aff"
+                    style="height: 60px; width: 60px; border: 3px solid #007aff"
                     v-bind:src="loggedInProfile.profileImage"
                   />
                   <b-dropdown id="dropdown-1" class="m-md-2">
@@ -304,6 +304,12 @@ export default {
   width: 40px;
   font-size: 40px;
   cursor: pointer;
+}
+
+.inner-drop{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .dropdown {
