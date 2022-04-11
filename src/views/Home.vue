@@ -14,6 +14,7 @@
             :filterId="filter.filterId"
             :image="filter.image"
             :filtername="filter.filterName"
+            :filtercode="filter.filterCode"
           >
           </FilterButton>
         </div>
@@ -38,21 +39,25 @@ export default {
           filterId: 1,
           image: "filter1.png",
           filterName: "Dogs",
+          filterCode: "dog"
         },
         {
           filterId: 2,
           image: "filter2.png",
           filterName: "Cats",
+          filterCode: "cat"
         },
         {
           filterId: 3,
           image: "filter3.png",
           filterName: "Fish",
+          filterCode: "fish"
         },
         {
           filterId: 4,
           image: "filter4.png",
           filterName: "Birds",
+          filterCode: "bird"
         },
       ],
     };
