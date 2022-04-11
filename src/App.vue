@@ -16,6 +16,13 @@
         <nav>
           <div class="nav-links">
             <div class="nav_link">
+              <router-link class="navbar-brand" to="/Product">
+                <div class="Product">
+                  <h3>Product</h3>
+                </div>
+              </router-link>
+            </div>
+            <div class="nav_link">
               <form action="">
                 <input type="search" required />
                 <i class="fa fa-fw fa-search"></i>
@@ -38,7 +45,6 @@
     <router-view />
   </div>
 </template>
-
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
@@ -98,10 +104,17 @@
   align-items: baseline;
   margin-top: 45px;
 }
+.header_navigation .Product {
+  color: #007aff;
+  position: relative;
+  padding-left: 70px;
+  padding-right: 70px;
+  margin-top: 20px;
+}
 
 .header_navigation .nav_link {
   position: relative;
-  padding-left: 50px;
+  padding-left: 70px;
 }
 
 .btn-white {
@@ -130,7 +143,7 @@ form {
   margin-top: 0px;
   margin-left: 0px;
   transition: all 1s;
-  transform: translate(-65px,-35px);
+  transform: translate(-65px, -35px);
   width: 50px;
   height: 30px;
   background: transparent;
@@ -157,8 +170,8 @@ input {
 form .fa {
   box-sizing: border-box;
   padding: 0px;
-  width:40px;
-  height:40px;
+  width: 40px;
+  height: 40px;
   position: absolute;
   top: 0;
   right: 0;
@@ -171,7 +184,7 @@ form .fa {
 
 form:hover,
 form:valid {
-  transform: translate(-340px,-35px);
+  transform: translate(-340px, -35px);
   width: 300px;
   cursor: pointer;
 }
