@@ -15,18 +15,17 @@
         </router-link>
         <nav>
           <div class="nav-links">
-            <div class="nav_link_central">
-              <router-link class="navbar-brand" to="/Product">
-                <div class="Product">
-                  <h3>Products</h3>
-                </div>
-              </router-link>
-            </div>
+                       
             <div class="nav_link">
               <form class="nav_link_form" action="">
                 <input type="search" required />
                 <i class="fa fa-fw fa-search"></i>
               </form>
+            </div>
+            <div class="nav_link">
+              <router-link class="btn-white" to="/Product">
+                <i class="fa fa-fw fa-shopping-bag"></i>
+              </router-link>
             </div>
             <div class="nav_link">
               <router-link class="btn-white" to="/shoppingCart">
@@ -167,9 +166,10 @@ export default {
 .header_navigation .nav-links {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   margin-top: 45px;
 }
+
 .header_navigation .Product {
   color: #007aff;
   position: relative;
@@ -209,7 +209,7 @@ export default {
   margin-top: 0px;
   margin-left: 0px;
   transition: all 1s;
-  transform: translate(-65px, -35px);
+  transform: translate(-65px, -20px);
   width: 50px;
   height: 30px;
   background: transparent;
@@ -250,7 +250,7 @@ export default {
 
 .nav_link_form:hover,
 .nav_link_form:valid {
-  transform: translate(-340px, -35px);
+  transform: translate(-340px, -20px);
   width: 300px;
   cursor: pointer;
 }
