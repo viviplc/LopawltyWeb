@@ -38,7 +38,7 @@
                 <div>
                   <img
                     class="rounded-circle z-depth-2"
-                    style="width: 58px; border: 3px solid #23b1bb"
+                    style="width: 58px; border: 3px solid #007aff"
                     v-bind:src="loggedInProfile.profileImage"
                   />
                   <b-dropdown id="dropdown-1" class="m-md-2">
@@ -318,6 +318,6 @@ export default {
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+  background-color: #007aff;
 }
 </style>
